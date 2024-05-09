@@ -2,9 +2,9 @@ package org.example;
 
 public class Node {
 
-    private int[][] board;
-    private int depth;
-    private StringBuilder history;
+    int[][] board;
+    int depth;
+    StringBuilder history;
 
     public Node(int[][] board, int depth, StringBuilder history) {
         this.board = board;

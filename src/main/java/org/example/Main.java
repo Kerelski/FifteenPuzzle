@@ -12,7 +12,10 @@ public class Main {
         Solver solver = null;
 
         if (solverType.equals("bfs")) {
-            solver = new Bfs();
+            solver = new Dfs();
+        }
+        if (solverType.equals("dfs")) {
+            solver = new Dfs();
         }
         GameBoard board = new GameBoard(solver, parameter);
 

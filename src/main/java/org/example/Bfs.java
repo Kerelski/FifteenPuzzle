@@ -7,16 +7,7 @@ public class Bfs extends Solver {
 
     public void solve(int[][] board, String parameter) {
 
-        char[] charArray = parameter.toCharArray();
-        int[] directions = new int[4];
-        int index = 0;
-        for (char letter : charArray){
-            if(letter == 'U') directions[index] = 0;
-            else if (letter == 'R') directions[index] = 1;
-            else if (letter == 'D') directions[index] = 2;
-            else if (letter == 'L') directions[index] = 3;
-            index++;
-        }
+        char[] directions = parameter.toCharArray();
 
         System.out.println(directions[0]);
         System.out.println(directions[1]);
@@ -51,11 +42,11 @@ public class Bfs extends Solver {
 
             String sCurrentBoard = boardToString(currentBoard);
             if(sCurrentBoard.equals(correctBoard)){
-                System.out.println(sCurrentBoard + "rozwiazany");
+                System.out.println(sCurrentBoard + " rozwiazany");
                 break;
             }
 
-            for(int dir : directions){
+            for(char dir : directions){
                 if(movePossibility(dir, currentBoard)){
                     System.out.println(dir);
                     int[][] newBoard = new int[rows][cols];
@@ -79,7 +70,7 @@ public class Bfs extends Solver {
             }
 
         }
-        System.out.println(history.toString() + "ruchy");
+        System.out.println(history.toString() + " ruchy");
     }
 
 }
