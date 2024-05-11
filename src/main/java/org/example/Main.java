@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -16,7 +18,7 @@ public class Main {
         Solver solver = null;
 
         if (solverType.equals("bfs")) {
-            solver = new Bfs();
+            solver = new Dfs();
         }
         if (solverType.equals("dfs")) {
             solver = new Dfs();
@@ -36,7 +38,7 @@ public class Main {
 
         StringBuilder solution = new StringBuilder();
         if(result[0] == "-1"){
-            solution.append(result);
+            solution.append(result[0]);
         }else{
             solution.append(result[0].length());
             solution.append("\n");
