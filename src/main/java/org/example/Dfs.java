@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dfs extends Solver {
 
-    public String solve(int[][] board, String parameter) {
+    public String[] solve(int[][] board, String parameter) {
 
         char[] directions = parameter.toCharArray();
 
@@ -75,7 +75,10 @@ public class Dfs extends Solver {
             }
 
         }
-        System.out.println(finalNode.history.toString() + " ruchy");
-        return finalNode.history.toString() + " ruchy";
+
+        String[] datas = new String[5];
+
+        return datas;
+
     }
 }

@@ -2,7 +2,7 @@ package org.example;
 
 public abstract class Solver {
 
-    abstract String solve(int[][] board, String parameter);
+    abstract String[] solve(int[][] board, String parameter);
 
     public int[] findPosition(int number, int[][] board) {
         int[] position = new int[2];

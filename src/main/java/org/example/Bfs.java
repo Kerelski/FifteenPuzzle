@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Bfs extends Solver {
 
-    public String solve(int[][] board, String parameter) {
+    public String[] solve(int[][] board, String parameter) {
 
         char[] directions = parameter.toCharArray();
 
@@ -24,13 +24,15 @@ public class Bfs extends Solver {
         Queue<Node> que = new LinkedList<>();
         que.offer(root);
 
-        List<Node> visited = new ArrayList<>();
+        List<Node> processed = new ArrayList<>();
+        processed.add(root);
+        int visitedCounter = 0;
 
         Node result = root;
 
         while (!que.isEmpty() && depth < maxDepth){
             Node currentNode = que.poll();
-            visited.add(currentNode);
+            visitedCounter++;
 
             String sCurrentBoard = boardToString(currentNode.board);
             if(sCurrentBoard.equals(correctBoard)){
@@ -54,14 +56,15 @@ public class Bfs extends Solver {
                     swapZero(dir, newNode.board);
 
                     boolean flag = true;
-                    for (Node visitedNode : visited) {
-                        if (Arrays.equals(visitedNode.board, newNode.board)) {
+                    for (Node processedNode : processed) {
+                        if (Arrays.deepEquals(processedNode.board, newNode.board)) {
                             flag = false;
                         }
                     }
                     if(flag){
                         newNode.history.append(dir);
                         que.offer(newNode);
+                        processed.add(currentNode);
                     }
 
                 }
@@ -69,12 +72,17 @@ public class Bfs extends Solver {
 
         }
 
+        String[] datas = new String[4];
         if (result == root){
-
-            return "-1";
+            datas[0] = "-1";
         }
-
-        return  result.history.toString();
+        else {
+            datas[0] = result.history.toString();
+            datas[1] = String.valueOf(visitedCounter);
+            datas[2] = String.valueOf(processed.size());
+            datas[3] = String.valueOf(result.depth);
+        }
+        return datas;
     }
 
 }

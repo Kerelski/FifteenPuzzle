@@ -15,7 +15,7 @@ public class GameBoard {
 
     }
 
-    public String solvePuzzle() {
+    public String[] solvePuzzle() {
         return solver.solve(board, parameter);
     }
 
