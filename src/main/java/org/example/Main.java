@@ -28,12 +28,11 @@ public class Main {
 
         board.setBoard(file.getData());
 
-        board.printBoard();
-
         long startTime = System.nanoTime();
         String[] result = board.solvePuzzle();
         long finishTime = System.nanoTime();
         double duration = (finishTime - startTime) / 1000000.0;
+        String stringDuration = String.format("%.3f", duration);
 
         StringBuilder solution = new StringBuilder();
         if(result[0] == "-1"){
@@ -50,7 +49,7 @@ public class Main {
 
 
         StringBuilder stats = new StringBuilder();
-        stats.append(result[0]);
+        stats.append(result[0].length());
         stats.append("\n");
         stats.append(result[1]);
         stats.append("\n");
@@ -58,7 +57,7 @@ public class Main {
         stats.append("\n");
         stats.append(result[3]);
         stats.append("\n");
-        stats.append(duration);
+        stats.append(stringDuration);
 
         Writer writerStats = new Writer(fileStats);
         writerStats.write(stats.toString());
