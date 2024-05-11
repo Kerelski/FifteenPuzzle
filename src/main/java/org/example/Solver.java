@@ -2,7 +2,7 @@ package org.example;
 
 public abstract class Solver {
 
-    abstract void solve(int[][] board, String parameter);
+    abstract String solve(int[][] board, String parameter);
 
     public int[] findPosition(int number, int[][] board) {
         int[] position = new int[2];
@@ -95,7 +95,7 @@ public abstract class Solver {
         int number = 1;
         for (int i = 0; i< board.length; i++){
             for (int j = 0; j<board[0].length; j++) {
-                if(number == 16) result.append(0);
+                if(number == board.length * board[0].length) result.append(0);
                 else {
                     result.append(number);
                     number++;

@@ -9,10 +9,12 @@ public class Main {
 
         String loadBoardFile = args[2];
 
+        String resultBoardFile = args[3];
+
         Solver solver = null;
 
         if (solverType.equals("bfs")) {
-            solver = new Dfs();
+            solver = new Bfs();
         }
         if (solverType.equals("dfs")) {
             solver = new Dfs();
@@ -27,11 +29,17 @@ public class Main {
         board.printBoard();
 
         long startTime = System.nanoTime();
-        board.solvePuzzle();
+        String result = board.solvePuzzle();
         long finishTime = System.nanoTime();
-
         double duration = (finishTime - startTime) / 1000000.0;
 
-        System.out.println(duration + "ms");
+        StringBuilder solution = new StringBuilder();
+        solution.append(result.length());
+        solution.append("\n");
+        solution.append(result);
+
+        Writer writer = new Writer(resultBoardFile);
+        writer.write(solution.toString());
+
     }
 }

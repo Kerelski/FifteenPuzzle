@@ -5,16 +5,12 @@ import java.util.*;
 
 public class Bfs extends Solver {
 
-    public void solve(int[][] board, String parameter) {
+    public String solve(int[][] board, String parameter) {
 
         char[] directions = parameter.toCharArray();
 
-        System.out.println(directions[0]);
-        System.out.println(directions[1]);
-        System.out.println(directions[2]);
-        System.out.println(directions[3]);
-
         String correctBoard = generateCorrectBoard(board);
+
 
         int rows = board.length;
         int cols = board[0].length;
@@ -25,52 +21,60 @@ public class Bfs extends Solver {
 
         Node root = new Node(board, depth, history);
 
-//        Queue<Node> que = new LinkedList<>();
-//        que.offer(root);
+        Queue<Node> que = new LinkedList<>();
+        que.offer(root);
 
-        Queue<int[][]> que = new LinkedList<>();
-        que.offer(board);
+        List<Node> visited = new ArrayList<>();
 
-        List<int[][]> visited = new ArrayList<>();
+        Node result = root;
 
+        while (!que.isEmpty() && depth < maxDepth){
+            Node currentNode = que.poll();
+            visited.add(currentNode);
 
-
-
-        while (!que.isEmpty()){
-            int[][] currentBoard = que.poll();
-            visited.add(currentBoard);
-
-            String sCurrentBoard = boardToString(currentBoard);
+            String sCurrentBoard = boardToString(currentNode.board);
             if(sCurrentBoard.equals(correctBoard)){
-                System.out.println(sCurrentBoard + " rozwiazany");
+
+                result = currentNode;
                 break;
             }
 
+            if(depth < currentNode.depth){
+                depth = currentNode.depth;
+            }
+
             for(char dir : directions){
-                if(movePossibility(dir, currentBoard)){
-                    System.out.println(dir);
-                    int[][] newBoard = new int[rows][cols];
+
+                if(movePossibility(dir, currentNode.board)){
+
+                    Node newNode = new Node(new int[rows][cols], currentNode.depth+1 , new StringBuilder(currentNode.history));
                     for (int i = 0; i< rows; i++){
-                        System.arraycopy(currentBoard[i], 0, newBoard[i], 0, cols);
+                        System.arraycopy(currentNode.board[i], 0, newNode.board[i], 0, cols);
                     }
-                    swapZero(dir, newBoard);
-                    System.out.println(boardToString(newBoard));
+                    swapZero(dir, newNode.board);
+
                     boolean flag = true;
-                    for (int[][] ints : visited) {
-                        if (Arrays.equals(ints, newBoard)) {
+                    for (Node visitedNode : visited) {
+                        if (Arrays.equals(visitedNode.board, newNode.board)) {
                             flag = false;
                         }
                     }
                     if(flag){
-                        history.append(dir);
-                        que.offer(newBoard);
+                        newNode.history.append(dir);
+                        que.offer(newNode);
                     }
 
                 }
             }
 
         }
-        System.out.println(history.toString() + " ruchy");
+
+        if (result == root){
+
+            return "-1";
+        }
+
+        return  result.history.toString();
     }
 
 }

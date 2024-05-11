@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dfs extends Solver {
 
-    public void solve(int[][] board, String parameter) {
+    public String solve(int[][] board, String parameter) {
 
         char[] directions = parameter.toCharArray();
 
@@ -14,6 +14,7 @@ public class Dfs extends Solver {
         System.out.println(directions[3]);
 
         String correctBoard = generateCorrectBoard(board);
+        System.out.println(correctBoard);
 
         int rows = board.length;
         int cols = board[0].length;
@@ -31,6 +32,7 @@ public class Dfs extends Solver {
         Node finalNode = root;
 
         while (!stack.isEmpty()) {
+
             Node currentNode = stack.pop();
             int[][] currentBoard = currentNode.board;
             visited.add(boardToString(currentBoard));
@@ -74,5 +76,6 @@ public class Dfs extends Solver {
 
         }
         System.out.println(finalNode.history.toString() + " ruchy");
+        return finalNode.history.toString() + " ruchy";
     }
 }
