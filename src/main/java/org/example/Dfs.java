@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dfs extends Solver {
     private String correctBoard;
-    private final int MAX_DEPTH = 20;
+    private final int MAX_DEPTH = 30;
     private int visitedStates = 0;
     private int processedStates = 0;
     private int further = 0;
@@ -22,7 +22,6 @@ public class Dfs extends Solver {
         while (!stack.isEmpty()) {
             Node currentNode = stack.pop();
             int[][] currentBoard = currentNode.getBoard();
-
             processedStates++;
 
             if (boardToString(currentBoard).equals(correctBoard)) {
@@ -33,7 +32,7 @@ public class Dfs extends Solver {
             if (currentNode.getDepth() >= MAX_DEPTH) {
                 continue;
             }
-
+            int counter = 0;
             for (char direction : directions) {
                 if (movePossibility(direction, currentBoard)) {
                     int[][] newBoard = copyBoard(currentBoard);
@@ -47,10 +46,19 @@ public class Dfs extends Solver {
                         further = Math.max(newNode.getDepth(), further);
                         visited.add(boardToString(newBoard));
                         visitedStates++;
-                        System.out.println(boardToString(newBoard));
+
+                        counter++;
                     }
                 }
             }
+            Node tab[] = new Node[counter];
+            for(int i = 0; i < counter; i++) {
+                tab[i] = stack.pop();
+            }
+            for(int i = 0; i < counter; i++) {
+                stack.push(tab[i]);
+            }
+
         }
 
         String[] datas = new String[4];
