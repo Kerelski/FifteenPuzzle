@@ -16,7 +16,7 @@ public class Main {
         Solver solver = null;
 
         if (solverType.equals("bfs")) {
-            solver = new Dfs();
+            solver = new Bfs();
         }
         if (solverType.equals("dfs")) {
             solver = new Dfs();
@@ -52,7 +52,11 @@ public class Main {
 
 
         StringBuilder stats = new StringBuilder();
-        stats.append(result[0].length());
+        if(result[0] == "-1"){
+            stats.append(result[0]);
+        }else{
+            stats.append(result[0].length());
+        }
         stats.append("\n");
         stats.append(result[1]);
         stats.append("\n");

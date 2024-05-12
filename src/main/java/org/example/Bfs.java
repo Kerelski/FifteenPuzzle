@@ -17,7 +17,6 @@ public class Bfs extends Solver {
 
         int maxDepth = 8;
         int depth = 0;
-        int maxReachedDepth = 0;
         StringBuilder history = new StringBuilder();
 
         Node root = new Node(board, depth, history);
@@ -35,17 +34,17 @@ public class Bfs extends Solver {
             Node currentNode = que.poll();
             visitedCounter++;
 
-            if(maxReachedDepth< currentNode.depth)maxReachedDepth=currentNode.depth;
+            if(depth < currentNode.depth){
+                depth = currentNode.depth;
+            }
+
             String sCurrentBoard = boardToString(currentNode.board);
             if(sCurrentBoard.equals(correctBoard)){
-
                 result = currentNode;
                 break;
             }
 
-            if(depth < currentNode.depth){
-                depth = currentNode.depth;
-            }
+
 
             for(char dir : directions){
 
@@ -82,7 +81,7 @@ public class Bfs extends Solver {
             datas[0] = result.history.toString();
             datas[1] = String.valueOf(visitedCounter);
             datas[2] = String.valueOf(processed.size());
-            datas[3] = String.valueOf(maxReachedDepth);
+            datas[3] = String.valueOf(result.depth);
         }
         return datas;
     }

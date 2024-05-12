@@ -22,7 +22,7 @@ public class Dfs extends Solver {
         while (!stack.isEmpty()) {
             Node currentNode = stack.pop();
             int[][] currentBoard = currentNode.getBoard();
-            processedStates++;
+            visitedStates++;
 
             if (boardToString(currentBoard).equals(correctBoard)) {
                 result = currentNode;
@@ -45,7 +45,7 @@ public class Dfs extends Solver {
                         stack.push(newNode);
                         further = Math.max(newNode.getDepth(), further);
                         visited.add(boardToString(newBoard));
-                        visitedStates++;
+                        processedStates++;
 
                         counter++;
                     }
