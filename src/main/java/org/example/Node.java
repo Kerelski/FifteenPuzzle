@@ -35,4 +35,5 @@ public class Node {
     public void setHistory(StringBuilder history) {
         this.history = history;
     }
+
 }
